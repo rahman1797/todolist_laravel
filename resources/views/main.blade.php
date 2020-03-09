@@ -64,37 +64,29 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+       
+        <form action="/list/add" method="POST">
+            {{ csrf_field() }}
+            <input type="date" name="tanggal" required="required">
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+            <input type="text" name="catatan" required="required">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+            <input type="hidden" name="status" value="0" required="required">
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
+            <button type="submit">Simpan</button>
+
+        </form>
+
+
+        <h1>List Kegiatan</h1>
+
+        @foreach($catatan as $c) 
+            <p>{{$c->todolist_tanggal}} - {{$c->todolist_catatan}} : {{$c->todolist_status}}</p>
+
+            <a href="/list/edit/{{$c->todolist_ID}}"><button>Edit</button></a>
+            <a href="/list/delete/{{$c->todolist_ID}}"><button>Delete</button></a>
+
+        @endforeach
+
     </body>
 </html>

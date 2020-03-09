@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','Todolist_C@main');
+
+
+Route::post('/list/add','Todolist_C@add');
+
+Route::get('/list/edit/{id}', 'Todolist_C@edit');
+
+Route::post('change', 'Todolist_C@change');
+
